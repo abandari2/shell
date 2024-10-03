@@ -2,7 +2,7 @@
 #------CPU USAGE-----------#
 #mpstat -u
 cpu=mpstat | awk 'FNR==4 {print $12}' | awk '{print $1}' | awk -F '.' '{print $1}'
-if [ $cpu >= 20 ]
+if [ $cpu|int >= 20 ]
 then
   echo "CPU utilization is low"
 else
@@ -13,7 +13,7 @@ fi
 #------MEMORY USAGE-----------#
 #free | grep Mem
 mem=free | grep Mem | awk '{print $3/$2 * 100.0}' | awk -F '.' '{print $1}'
-if [ $mem <= 80 ]
+if [ $mem|int <= 80 ]
 then
   echo "MEMORY utilization is low"
 else
